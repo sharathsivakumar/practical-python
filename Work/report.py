@@ -4,7 +4,7 @@
 import csv
 
 
-def read_portfolio(filename):
+def read_portfolio_tuple(filename):
     cost = 0.0
     portfolio = []
     try:
@@ -23,5 +23,31 @@ def read_portfolio(filename):
                 else:
                     portfolio.append(holding)
     return portfolio
+
+def read_prices(filename):
+    portfolio = {}
+    try:
+        f = open(filename, 'r')
+    except FileNotFoundError:
+        print("File not found:",filename)
+    else:
+        with f:
+            for rows in f:
+                if len(rows.strip()) != 0:
+                    row = rows.split(',')
+                    print("Row:",row)
+                    portfolio[row[0]] = float(row[1])
+                else:
+                    print("Empty row")
+    return portfolio
+
+portfolio =  read_portfolio_dict('Data/portfolio.csv')
+prices = read_prices('Data/prices.csv')
+
+total_cost=0.0
+purchase_cost = 0.0
+
+for s in portfolio:
+    total_cost
 
 

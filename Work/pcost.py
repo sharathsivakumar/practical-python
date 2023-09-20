@@ -2,7 +2,7 @@
 #
 # Exercise 1.27
 
-def portfolio_cost(filename):
+def portfolio_cost(filenames):
     cost = 0.0
     try:
         f = open(filename, 'rt')
@@ -11,10 +11,10 @@ def portfolio_cost(filename):
     else:
         with f:
             headers = next(f)
-            for shares in f:
+            for rownum,shares in enumerate(f):
                 row = shares.split(',')
                 try:
                     cost += int(row[1]) * float(row[2])
                 except ValueError:
-                    print("Bad row", row)
+                    print(f'Bad row{rownum}:, {row}')
     return cost
